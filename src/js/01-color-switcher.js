@@ -31,9 +31,3 @@ function onStopBtnClick(event) {
   refs.btnStartEl.disabled = false;
   refs.btnStartEl.style.backgroundColor = '';
 }
-
-function btnStatus() {
-  if (intervalId) {
-  } else {
-  }
-}
