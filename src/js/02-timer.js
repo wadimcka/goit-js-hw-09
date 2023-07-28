@@ -21,8 +21,6 @@ const options = {
   onClose(selectedDates) {
     if (selectedDates[0].getTime() < Date.now()) {
       Notify.failure('Please choose a date in the future');
-
-      //   window.alert();
     } else {
       refs.btnEl.disabled = false;
       refs.btnEl.addEventListener('click', onBtnClick);
@@ -43,7 +41,7 @@ function onBtnClick(event) {
   intervalId = setInterval(() => {
     const curretnTime = Date.now();
     let ms = selectedTime.getTime() - curretnTime;
-    console.log(ms);
+
     if (ms <= 0) {
       clearInterval(intervalId);
       ms = 0;
