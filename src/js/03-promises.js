@@ -33,17 +33,15 @@ function createPromise(position, delay) {
 }
 
 function promiseCaller({ dataDelay, step, amount }) {
-  const promises = [];
   for (let i = 0; i < amount; i += 1) {
     let position = i + 1;
     let delay = dataDelay + i * step;
-    promises.push(createPromise(position, delay));
+    createPromise(position, delay)
+      .then(({ position, delay }) => {
+        Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+      })
+      .catch(({ position, delay }) => {
+        Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+      });
   }
-  Promise.race(promises)
-    .then(({ position, delay }) => {
-      Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
-    })
-    .catch(({ position, delay }) => {
-      Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
-    });
 }
