@@ -33,11 +33,11 @@ let intervalId = null;
 const fp = flatpickr('#datetime-picker', options);
 
 function onBtnClick(event) {
-  const selectedTime = flatpickr.parseDate(refs.inputEl.value);
   if (intervalId !== null) {
     return;
   }
 
+  const selectedTime = new Date(refs.inputEl.value);
   intervalId = setInterval(() => {
     const curretnTime = Date.now();
     let ms = selectedTime.getTime() - curretnTime;
@@ -46,6 +46,7 @@ function onBtnClick(event) {
       clearInterval(intervalId);
       ms = 0;
       intervalId = null;
+      refs.btnEl.disabled = false;
       refs.inputEl.disabled = false;
     }
     let timeData = convertMs(ms);
